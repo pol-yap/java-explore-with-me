@@ -16,7 +16,7 @@ CREATE TABLE users (
 
 CREATE TABLE compilations (
 	id int8 NOT NULL,
-	"name" varchar(255) NOT NULL,
+	title varchar(255) NOT NULL,
 	pinned bool NULL,
 	CONSTRAINT compilations_pkey PRIMARY KEY (id),
 	CONSTRAINT compilation_name_unique UNIQUE (name)
