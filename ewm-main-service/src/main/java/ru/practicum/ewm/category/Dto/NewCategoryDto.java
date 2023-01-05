@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 public class NewCategoryDto implements Dto<Category> {
 
-    @NotBlank
+    @NotBlank(message = "Category name shouldn't be empty")
     private String name;
 
     @Override

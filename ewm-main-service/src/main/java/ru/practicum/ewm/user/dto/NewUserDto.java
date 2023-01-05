@@ -11,10 +11,10 @@ import javax.validation.constraints.NotBlank;
 @Getter
 public class NewUserDto implements Dto<User> {
 
-    @NotBlank
+    @NotBlank(message = "User name shouldn't be empty")
     private String name;
 
-    @Email
+    @Email(message = "User email should be valid e-mail address")
     private String email;
 
     @Override

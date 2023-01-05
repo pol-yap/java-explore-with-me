@@ -12,10 +12,10 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class CategoryDto implements Dto<Category> {
 
-    @NotNull
+    @NotNull(message = "Category id shouldn't be null")
     private final long id;
 
-    @NotBlank
+    @NotBlank(message = "Category name shouldn't be empty")
     private final String name;
 
     public CategoryDto(Category entity) {

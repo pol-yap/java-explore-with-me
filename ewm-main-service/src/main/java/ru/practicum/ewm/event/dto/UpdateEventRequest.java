@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class UpdateEventDto {
+public class UpdateEventRequest {
 
     private final String annotation;
 

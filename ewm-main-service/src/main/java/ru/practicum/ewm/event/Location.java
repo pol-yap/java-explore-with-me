@@ -18,12 +18,12 @@ import javax.persistence.Table;
 public class Location {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "lat")
+    @Column(name = "lat", nullable = false)
     private Float lat;
 
-    @Column(name = "lon")
+    @Column(name = "lon", nullable = false)
     private Float lon;
 }

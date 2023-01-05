@@ -12,13 +12,13 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class UserDto {
 
-    @NotNull
+    @NotNull(message = "User id shouldn't be null")
     private final long id;
 
-    @NotBlank
+    @NotBlank(message = "User name shouldn't be empty")
     private final String name;
 
-    @Email
+    @Email(message = "User email should be valid e-mail address")
     private final String email;
 
     public UserDto(User user) {

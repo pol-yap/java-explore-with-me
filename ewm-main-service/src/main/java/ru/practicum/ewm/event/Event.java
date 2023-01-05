@@ -49,6 +49,10 @@ public class Event {
     @ManyToOne
     private Location location;
 
+    private Float latitude;
+
+    private Float longitude;
+
     private Boolean paid;
 
     private Integer participantLimit;
