@@ -22,6 +22,7 @@ public class Event {
     @Id
     private Long id;
 
+    @Column(length = 2000)
     private String annotation;
 
     @ManyToOne
@@ -36,6 +37,7 @@ public class Event {
 
     private LocalDateTime createdOn;
 
+    @Column(length = 7000)
     private String description;
 
     private LocalDateTime eventDate;
@@ -57,6 +59,7 @@ public class Event {
 
     private EventState state;
 
+    @Column(length = 120)
     private String title;
 
     private Integer views;

@@ -1,14 +1,16 @@
 package ru.practicum.ewm.category.Dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import ru.practicum.ewm.category.Category;
 import ru.practicum.ewm.common.Dto;
 
+import javax.validation.constraints.NotBlank;
+
 @Getter
-@AllArgsConstructor
 public class NewCategoryDto implements Dto<Category> {
-    private final String name;
+
+    @NotBlank
+    private String name;
 
     @Override
     public Category makeEntity() {
