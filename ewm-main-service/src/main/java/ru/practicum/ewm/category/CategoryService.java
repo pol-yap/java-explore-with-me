@@ -2,10 +2,10 @@ package ru.practicum.ewm.category;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import ru.practicum.ewm.common.TrimRequest;
 import ru.practicum.ewm.common.errors.NotFoundException;
 
 import java.util.Collection;
@@ -28,7 +28,7 @@ public class CategoryService {
     }
 
     public Collection<Category> getAll(int from, int size) {
-        Pageable pageable = PageRequest.of(from / size, size, Sort.by("id").ascending());
+        Pageable pageable = new TrimRequest(from, size, Sort.by("id").ascending());
 
         return repository.findAll(pageable).getContent();
     }

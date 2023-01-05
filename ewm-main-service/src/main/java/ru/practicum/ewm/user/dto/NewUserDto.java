@@ -1,13 +1,28 @@
 package ru.practicum.ewm.user.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import ru.practicum.ewm.category.Category;
+import ru.practicum.ewm.common.Dto;
+import ru.practicum.ewm.user.User;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @Getter
-@AllArgsConstructor
-public class NewUserDto {
+public class NewUserDto implements Dto<User> {
 
-    private final String name;
+    @NotBlank
+    private String name;
 
-    private final String email;
+    @Email
+    private String email;
+
+    @Override
+    public User makeEntity() {
+        User user = new User();
+        user.setName(this.name);
+        user.setEmail(this.email);
+
+        return user;
+    }
 }
