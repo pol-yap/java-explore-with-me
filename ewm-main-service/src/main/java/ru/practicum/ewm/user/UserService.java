@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.practicum.ewm.common.TrimRequest;
+import ru.practicum.ewm.common.errors.NotFoundException;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,10 +25,14 @@ public class UserService {
         return user;
     }
 
-    public Collection<User> getAll(Long[] ids, int from, int size) {
+    public Collection<User> getAll(Long[] ids, long from, int size) {
         Pageable pageable = new TrimRequest(from, size, Sort.by("id").ascending());
 
         return repository.findByIdInOrderByIdAsc(Arrays.asList(ids), pageable);
+    }
+
+    public User getById(Long id) {
+        return repository.findById(id).orElseThrow(() -> new NotFoundException(id, "User"));
     }
 
     public void delete(Long id) {

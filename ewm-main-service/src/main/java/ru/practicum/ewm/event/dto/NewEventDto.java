@@ -1,47 +1,65 @@
 package ru.practicum.ewm.event.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import ru.practicum.ewm.common.Dto;
+import ru.practicum.ewm.event.Event;
+import ru.practicum.ewm.event.Location;
 
-import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @AllArgsConstructor
-public class NewEventDto {
+public class NewEventDto implements Dto<Event> {
 
     @NotBlank(message = "Event annotation shouldn't be empty")
-    @Size(max = 2000, message = "Event annotation size shouldn't exceed 2000 characters")
-    private final String annotation;
+    private String annotation;
 
     @NotNull(message = "Event category id shouldn't be null")
-    private final long category;
+    private Long category;
 
     @NotBlank(message = "Event description shouldn't be empty")
-    @Size(max = 7000, message = "Event description size shouldn't exceed 7000 characters")
-    private final String description;
+    private String description;
 
-    @NotNull(message = "Event date shouldn't be null")
-    @Future(message = "Event date should be in the future")
-    @JsonFormat(
-            shape = JsonFormat.Shape.STRING,
-            pattern = "yyyy-MM-dd HH:mm:ss")
-    private final LocalDateTime eventDate;
+//    @NotNull(message = "Event date shouldn't be null")
+//    @Future(message = "Event date should be in the future")
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+//    private LocalDateTime eventDate;
+    @NotBlank(message = "Event date shouldn't be empty")
+    private String eventDate;
 
     @NotNull(message = "Event location shouldn't be null")
-    private final LocationDto location;
+    private Location location;
 
-    private final boolean paid;
+    private Boolean paid;
 
-    private final int participantLimit;
+    private Integer participantLimit;
 
-    private final boolean requestModeration;
+    private Boolean requestModeration;
 
     @NotBlank(message = "Event title shouldn't be empty")
     @Size(min =3, max = 120, message = "Event title size should be between 3 and 120 characters")
-    private final String title;
+    private String title;
+
+    @Override
+    public Event makeEntity() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        return Event.builder()
+                    .annotation(annotation)
+                    .description(description)
+                    .eventDate(LocalDateTime.parse(eventDate, formatter))
+//                    .eventDate(eventDate)
+                    .latitude(location.getLat())
+                    .longitude(location.getLon())
+                    .paid(paid)
+                    .participantLimit(participantLimit)
+                    .requestModeration(requestModeration)
+                    .title(title)
+                    .build();
+    }
 }

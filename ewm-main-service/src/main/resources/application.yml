@@ -1,5 +1,14 @@
 server.port: 8080
 
+ewm:
+  event:
+    max-title-size: 120
+    min-title-size: 3
+    max-annotation-size: 2000
+    max-description-size: 7000
+    min-hours-after-creation: 2
+    min-hours-after-publish: 1
+
 spring:
   datasource:
     url: ${SPRING_DATASOURCE_URL}

@@ -58,6 +58,16 @@ public class CommonExceptionHandler {
         return handleAndResponse(apiError);
     }
 
+    @ExceptionHandler(DataCheckException.class)
+    public ResponseEntity<ApiError> handleDataCheckException(DataCheckException e) {
+        ApiError apiError = ApiError.builder()
+                                    .message(e.getMessage())
+                                    .status(HttpStatus.BAD_REQUEST)
+                                    .build();
+
+        return handleAndResponse(apiError);
+    }
+
     private ResponseEntity<ApiError> handleAndResponse(ApiError apiError) {
         log.warn(apiError.getMessage());
 

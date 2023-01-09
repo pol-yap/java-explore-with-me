@@ -30,7 +30,7 @@ public class CategoryController {
     @GetMapping("/categories/{catId}")
     @ResponseStatus(HttpStatus.OK)
     public CategoryDto getById(@PathVariable("catId") long categoryId) {
-        return new CategoryDto(service.getByIdOrThrow(categoryId));
+        return new CategoryDto(service.getById(categoryId));
     }
 
     @PostMapping("/admin/categories")

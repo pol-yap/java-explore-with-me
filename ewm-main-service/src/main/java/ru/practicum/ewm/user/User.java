@@ -1,5 +1,6 @@
 package ru.practicum.ewm.user;
 
+import com.querydsl.core.annotations.QueryExclude;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

@@ -1,29 +1,19 @@
 package ru.practicum.ewm.event;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-@ToString
-
-@Entity
-@Table(name = "locations")
+@AllArgsConstructor
 public class Location {
 
-    @Id
-    @Column(name = "id", nullable = false)
-    private Long id;
-
-    @Column(name = "lat", nullable = false)
+    @NotNull(message = "Event location latitude shouldn't be null")
     private Float lat;
 
-    @Column(name = "lon", nullable = false)
+    @NotNull(message = "Event location longitude shouldn't be null")
     private Float lon;
 }

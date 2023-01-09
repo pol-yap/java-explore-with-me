@@ -1,5 +1,6 @@
-package ru.practicum.ewm.requests;
+package ru.practicum.ewm.participation;
 
+import com.querydsl.core.annotations.QueryExclude;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,10 +15,12 @@ import java.time.LocalDateTime;
 @ToString
 
 @Entity
+@QueryExclude
 @Table(name = "requests")
-public class Request {
+public class ParticipationRequest {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -27,5 +30,7 @@ public class Request {
     private User requester;
 
     @Column(nullable = false)
-    private LocalDateTime created;
+    private LocalDateTime created = LocalDateTime.now();
+
+    private ParticipationRequestState state = ParticipationRequestState.PENDING;
 }

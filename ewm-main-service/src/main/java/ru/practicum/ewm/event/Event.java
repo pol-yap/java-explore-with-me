@@ -1,8 +1,6 @@
 package ru.practicum.ewm.event;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import ru.practicum.ewm.category.Category;
 import ru.practicum.ewm.compilation.Compilation;
 import ru.practicum.ewm.user.User;
@@ -14,12 +12,16 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 
 @Entity
 @Table(name = "events")
 public class Event {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(length = 2000)
@@ -33,9 +35,11 @@ public class Event {
     @ToString.Exclude
     private Set<Compilation> compilations;
 
-    private Integer confirmedRequests;
+    @Builder.Default
+    private Integer confirmedRequests = 0;
 
-    private LocalDateTime createdOn;
+    @Builder.Default
+    private LocalDateTime createdOn = LocalDateTime.now();
 
     @Column(length = 7000)
     private String description;
@@ -45,9 +49,6 @@ public class Event {
     @ManyToOne
     @ToString.Exclude
     private User initiator;
-
-    @ManyToOne
-    private Location location;
 
     private Float latitude;
 
@@ -61,10 +62,28 @@ public class Event {
 
     private Boolean requestModeration;
 
-    private EventState state;
+    @Builder.Default
+    private EventState state = EventState.PENDING;
 
     @Column(length = 120)
     private String title;
 
     private Integer views;
+
+    @Builder.Default
+    private Boolean available = true;
+
+    @Override
+    public boolean equals(Object e) {
+        if (!e.getClass().equals(Event.class)) {
+            return false;
+        }
+
+       return ((Event) e).getId().equals(this.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.id.hashCode();
+    }
 }

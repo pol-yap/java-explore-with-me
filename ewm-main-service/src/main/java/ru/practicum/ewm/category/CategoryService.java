@@ -23,7 +23,7 @@ public class CategoryService {
         return category;
     }
 
-    public Category getByIdOrThrow(Long id) {
+    public Category getById(Long id) {
         return repository.findById(id).orElseThrow(() -> new NotFoundException(id, "Category"));
     }
 
@@ -34,6 +34,10 @@ public class CategoryService {
     }
 
     public Category update(Category category) {
+        Long id = category.getId();
+        if (!repository.existsById(id)) {
+            throw new NotFoundException(id, "Category");
+        }
         repository.saveAndFlush(category);
         log.info("Updated category: {}", category);
 

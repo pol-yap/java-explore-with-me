@@ -3,20 +3,31 @@ package ru.practicum.ewm.compilation.Dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import ru.practicum.ewm.event.Event;
+import ru.practicum.ewm.compilation.Compilation;
+import ru.practicum.ewm.event.dto.EventShortDto;
 
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
 @AllArgsConstructor
 public class CompilationDto {
 
-    private Collection<Event> events;
+    private final Set<EventShortDto> events;
 
-    private long id;
+    private final long id;
 
-    private boolean pinned;
+    private final boolean pinned;
 
-    private String title;
+    private final String title;
+
+    public CompilationDto(Compilation compilation) {
+        this.id = compilation.getId();
+        this.title = compilation.getTitle();
+        this.pinned = compilation.getPinned();
+        this.events = new HashSet<>();
+        compilation.getEvents().forEach(event -> this.events.add(new EventShortDto(event)));
+    }
 }

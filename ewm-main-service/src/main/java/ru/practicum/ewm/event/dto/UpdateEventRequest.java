@@ -2,24 +2,25 @@ package ru.practicum.ewm.event.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.NotNull;
 
 @Getter
-@AllArgsConstructor
+@NoArgsConstructor
 public class UpdateEventRequest {
 
-    private final String annotation;
+    protected String annotation;
 
-    private final long category;
+    protected Long category;
 
-    private final String description;
+    protected String description;
 
-    private final String eventDate;
+    protected String eventDate;
 
-    private final long eventId;
+    protected Boolean paid;
 
-    private final boolean paid;
+    protected Integer participantLimit;
 
-    private final int participantLimit;
-
-    private final String title;
+    protected String title;
 }

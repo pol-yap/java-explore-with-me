@@ -1,5 +1,6 @@
 package ru.practicum.ewm.category;
 
+import com.querydsl.core.annotations.QueryExclude;
 import lombok.*;
 
 import javax.persistence.*;

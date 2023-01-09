@@ -18,7 +18,7 @@ public class UserController {
 
     @GetMapping("/admin/users")
     @ResponseStatus(HttpStatus.OK)
-    public List<UserDto> getAll(@RequestParam(defaultValue = "0") int from,
+    public List<UserDto> getAll(@RequestParam(defaultValue = "0") long from,
                                 @RequestParam(defaultValue = "10") int size,
                                 @RequestParam Long[] ids) {
         final List<UserDto> result = new ArrayList<>();
