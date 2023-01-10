@@ -1,7 +1,5 @@
 package ru.practicum.ewm.event;
 
-import java.util.Optional;
-
 public enum EventSort {
     EVENT_DATE,
     VIEWS,

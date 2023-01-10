@@ -43,7 +43,7 @@ CREATE TABLE events (
 	request_moderation bool NULL,
 	state int4 NULL,
 	title varchar(120) NULL,
-	"views" int4 NULL,
+	"views" int4 NOT NULL,
 	category_id int8 NULL,
 	initiator_id int8 NULL,
 	latitude float4 NOT NULL,

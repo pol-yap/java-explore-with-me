@@ -1,11 +1,12 @@
 package ru.practicum.ewm.event;
 
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.event.dto.*;
+import ru.practicum.ewm.statclient.StatClient;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,9 +17,13 @@ import java.util.stream.Collectors;
 public class EventController {
 
     private final EventService service;
+    private final StatClient statClient;
+    private final HttpServletRequest request;
 
     @GetMapping("/events/{eventId}")
     public EventFullDto publicGetById(@PathVariable("eventId") long eventId) {
+        statClient.hit(request.getRequestURI(), request.getRemoteAddr());
+
         return new EventFullDto(service.publicGetById(eventId));
     }
 
@@ -52,6 +57,8 @@ public class EventController {
                 .sort(sort)
                 .build();
 
+        statClient.hit(request.getRequestURI(), request.getRemoteAddr());
+
         return service.search(criteria, from, size)
                       .stream()
                       .map(EventShortDto::new)
@@ -73,6 +80,8 @@ public class EventController {
                 .rangeStart(rangeStart)
                 .rangeEnd(rangeEnd)
                 .build();
+
+        statClient.hit(request.getRequestURI(), request.getRemoteAddr());
 
         return service.search(criteria, from, size)
                       .stream()

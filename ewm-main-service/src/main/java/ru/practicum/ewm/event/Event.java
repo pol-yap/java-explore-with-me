@@ -68,7 +68,8 @@ public class Event {
     @Column(length = 120)
     private String title;
 
-    private Integer views;
+    @Builder.Default
+    private Integer views = 0;
 
     @Builder.Default
     private Boolean available = true;

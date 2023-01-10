@@ -2,7 +2,6 @@ package ru.practicum.ewm.event;
 
 import lombok.Builder;
 import lombok.Getter;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Builder
 @Getter

@@ -8,6 +8,7 @@ ewm:
     max-description-size: 7000
     min-hours-after-creation: 2
     min-hours-after-publish: 1
+  stat-service-url: ${EWM_STAT_SERVICE_URL}
 
 spring:
   datasource:
@@ -37,7 +38,7 @@ javax.persistence.schema-generation:
   create-script-source: schema.sql
 
 logging.level:
-  ru.practicum.shareit: TRACE
+  ru.practicum.ewm: TRACE
   org.springframework:
     orm:
       jpa: INFO

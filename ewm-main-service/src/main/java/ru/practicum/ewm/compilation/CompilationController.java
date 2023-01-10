@@ -2,7 +2,6 @@ package ru.practicum.ewm.compilation;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.compilation.Dto.CompilationDto;
 import ru.practicum.ewm.compilation.Dto.NewCompilationDto;

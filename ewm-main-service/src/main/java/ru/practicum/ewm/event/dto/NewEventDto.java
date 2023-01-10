@@ -25,10 +25,6 @@ public class NewEventDto implements Dto<Event> {
     @NotBlank(message = "Event description shouldn't be empty")
     private String description;
 
-//    @NotNull(message = "Event date shouldn't be null")
-//    @Future(message = "Event date should be in the future")
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-//    private LocalDateTime eventDate;
     @NotBlank(message = "Event date shouldn't be empty")
     private String eventDate;
 
@@ -53,7 +49,6 @@ public class NewEventDto implements Dto<Event> {
                     .annotation(annotation)
                     .description(description)
                     .eventDate(LocalDateTime.parse(eventDate, formatter))
-//                    .eventDate(eventDate)
                     .latitude(location.getLat())
                     .longitude(location.getLon())
                     .paid(paid)

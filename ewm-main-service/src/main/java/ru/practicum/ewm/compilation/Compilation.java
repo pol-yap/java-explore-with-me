@@ -1,6 +1,5 @@
 package ru.practicum.ewm.compilation;
 
-import com.querydsl.core.annotations.QueryExclude;
 import lombok.*;
 import ru.practicum.ewm.event.Event;
 

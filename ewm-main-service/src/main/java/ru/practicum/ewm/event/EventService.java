@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import ru.practicum.ewm.category.Category;
 import ru.practicum.ewm.category.CategoryService;
 import ru.practicum.ewm.common.TrimRequest;
@@ -79,8 +78,13 @@ public class EventService {
     }
 
     public Event publicGetById(Long eventId) {
-        return repository.findByIdAndState(eventId, EventState.PUBLISHED)
-                         .orElseThrow(() -> new NotFoundException(eventId, "Event"));
+        Event event = repository.findByIdAndState(eventId, EventState.PUBLISHED)
+                                .orElseThrow(() -> new NotFoundException(eventId, "Event"));
+        event.setViews(event.getViews() + 1);
+        repository.saveAndFlush(event);
+        log.info("Event with id {} was viewed", eventId);
+
+        return event;
     }
 
     public Event privateUpdate(PrivateUpdateEventRequest data, Long userId) {
