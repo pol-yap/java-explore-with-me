@@ -24,7 +24,7 @@ public class EndpointHitRepositoryJdbcImpl implements EndpointHitRepository {
 
     private static final String SQL_SELECT_UNIQUE =
             "SELECT Count(ip) AS hits, uri, app FROM " +
-                    "(SELECT ip, uri, app FROM endpoint_hit " +
+                    "(SELECT DISTINCT ip, uri, app FROM endpoint_hit " +
                     "WHERE hit_timestamp Between :start_date and :end_date AND uri IN (:uris)) AS u " +
                     "GROUP BY uri, app";
 
