@@ -1,7 +1,6 @@
 package ru.practicum.ewm.user.dto;
 
 import lombok.Getter;
-import ru.practicum.ewm.category.Category;
 import ru.practicum.ewm.common.Dto;
 import ru.practicum.ewm.user.User;
 

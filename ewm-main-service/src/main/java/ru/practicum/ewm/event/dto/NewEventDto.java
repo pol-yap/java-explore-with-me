@@ -38,7 +38,7 @@ public class NewEventDto implements Dto<Event> {
     private Boolean requestModeration;
 
     @NotBlank(message = "Event title shouldn't be empty")
-    @Size(min =3, max = 120, message = "Event title size should be between 3 and 120 characters")
+    @Size(min = 3, max = 120, message = "Event title size should be between 3 and 120 characters")
     private String title;
 
     @Override

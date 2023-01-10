@@ -17,7 +17,7 @@ public class EndpointHitDto {
     private String timestamp;
 
     @JsonIgnore
-    private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public EndpointHitDto(EndpointHit hit) {
         this.id = hit.getId();

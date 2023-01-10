@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class CommonExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ApiError> handleNotFound (NotFoundException e) {
+    public ResponseEntity<ApiError> handleNotFound(NotFoundException e) {
         ApiError apiError = ApiError.builder()
                 .message(String.format("%s which has id %d not found", e.getEntityType(), e.getEntityId()))
                 .status(HttpStatus.NOT_FOUND)

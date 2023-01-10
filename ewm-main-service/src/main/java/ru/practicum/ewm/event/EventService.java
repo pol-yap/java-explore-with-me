@@ -334,7 +334,7 @@ public class EventService {
     }
 
     private void updateEventData(Event event, UpdateEventRequest data) {
-        boolean isChanged =false;
+        boolean isChanged = false;
 
         String annotation = data.getAnnotation();
         if (annotation != null && !annotation.isBlank()) {

@@ -64,7 +64,7 @@ public class ParticipationRequestService {
         return repository.findByEventId(eventId);
     }
 
-    public ParticipationRequest cancel( Long requestId) {
+    public ParticipationRequest cancel(Long requestId) {
         ParticipationRequest request = this.setState(requestId, ParticipationRequestState.CANCELED);
         log.info("Participation request {} is canceled by requester", requestId);
 

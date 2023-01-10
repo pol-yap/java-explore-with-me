@@ -15,34 +15,52 @@ public class TrimRequest implements Pageable {
     private final Sort sort;
 
     @Override
-    public int getPageNumber() { return 0; }
+    public int getPageNumber() {
+        return 0;
+    }
 
     @Override
-    public int getPageSize() { return size; }
+    public int getPageSize() {
+        return size;
+    }
 
     @Override
-    public long getOffset() { return offset; }
-
-    @Override
-    @NonNull
-    public Sort getSort() { return this.sort; }
-
-    @Override
-    @NonNull
-    public Pageable next() { return this; }
-
-    @Override
-    @NonNull
-    public Pageable previousOrFirst() { return this; }
+    public long getOffset() {
+        return offset;
+    }
 
     @Override
     @NonNull
-    public Pageable first() { return this; }
+    public Sort getSort() {
+        return this.sort;
+    }
 
     @Override
     @NonNull
-    public Pageable withPage(int pageNumber) { return this; }
+    public Pageable next() {
+        return this;
+    }
 
     @Override
-    public boolean hasPrevious() { return false; }
+    @NonNull
+    public Pageable previousOrFirst() {
+        return this;
+    }
+
+    @Override
+    @NonNull
+    public Pageable first() {
+        return this;
+    }
+
+    @Override
+    @NonNull
+    public Pageable withPage(int pageNumber) {
+        return this;
+    }
+
+    @Override
+    public boolean hasPrevious() {
+        return false;
+    }
 }

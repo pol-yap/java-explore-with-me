@@ -14,7 +14,7 @@ public class StatService {
 
     private final EndpointHitRepository repository;
 
-    private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public void hit(EndpointHit hit) {
         repository.hit(hit);
