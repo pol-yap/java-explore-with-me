@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.ewm.category.Category;
 import ru.practicum.ewm.category.CategoryService;
 import ru.practicum.ewm.common.TrimRequest;
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@Transactional
 public class EventService {
 
     private final EventRepository repository;

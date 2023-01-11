@@ -49,7 +49,7 @@ public class CompilationController {
 
     @DeleteMapping("/admin/compilations/{compId}/events/{eventId}")
     public void removeEvent(@PathVariable Long compId,
-                         @PathVariable Long eventId) {
+                            @PathVariable Long eventId) {
         service.includeEvent(compId, eventId, false);
     }
 

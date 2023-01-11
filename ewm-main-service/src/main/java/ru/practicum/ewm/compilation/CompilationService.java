@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.ewm.common.TrimRequest;
 import ru.practicum.ewm.common.errors.NotFoundException;
 import ru.practicum.ewm.event.Event;
@@ -17,6 +18,7 @@ import java.util.Set;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional
 public class CompilationService {
 
     private final CompilationRepository repository;
@@ -40,17 +42,6 @@ public class CompilationService {
     public List<Compilation> getAll(Long from, Integer size) {
         Pageable pageable = new TrimRequest(from, size, Sort.by("id").ascending());
         return repository.findAll(pageable).getContent();
-    }
-
-    public Compilation update(Compilation compilation) {
-        Long id = compilation.getId();
-        if (!repository.existsById(id)) {
-            throw new NotFoundException(id, "Compilation");
-        }
-        repository.saveAndFlush(compilation);
-        log.info("Compilation updated: {}", compilation);
-
-        return compilation;
     }
 
     public void pin(Long id, Boolean pinned) {

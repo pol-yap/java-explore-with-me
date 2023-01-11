@@ -3,6 +3,7 @@ package ru.practicum.ewm.participation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.ewm.common.errors.DataCheckException;
 import ru.practicum.ewm.common.errors.NotFoundException;
 import ru.practicum.ewm.event.Event;
@@ -15,6 +16,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional
 public class ParticipationRequestService {
 
     private final ParticipationRequestRepository repository;
@@ -32,13 +34,11 @@ public class ParticipationRequestService {
                     event.getId()));
         }
 
-        if (event.getParticipantLimit() != null && event.getConfirmedRequests() != null) {
-            if (event.getConfirmedRequests() >= event.getParticipantLimit()) {
-                throw new DataCheckException(String.format(
+        if (!event.getAvailable()) {
+            throw new DataCheckException(String.format(
                         "Limit of participants (%d) for event (%d) is reached",
                         event.getParticipantLimit(),
                         event.getId()));
-            }
         }
 
         ParticipationRequest request = new ParticipationRequest();

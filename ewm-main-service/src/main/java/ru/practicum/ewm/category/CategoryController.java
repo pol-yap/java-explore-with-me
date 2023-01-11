@@ -3,11 +3,11 @@ package ru.practicum.ewm.category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.ewm.category.Dto.CategoryDto;
-import ru.practicum.ewm.category.Dto.NewCategoryDto;
+import ru.practicum.ewm.category.dto.CategoryDto;
+import ru.practicum.ewm.category.dto.NewCategoryDto;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -21,10 +21,11 @@ public class CategoryController {
     @ResponseStatus(HttpStatus.OK)
     public List<CategoryDto> getAll(@RequestParam(defaultValue = "0") int from,
                                     @RequestParam(defaultValue = "10") int size) {
-        final List<CategoryDto> result = new ArrayList<>();
-        service.getAll(from, size).forEach(category -> result.add(new CategoryDto(category)));
 
-        return result;
+        return service.getAll(from, size)
+                      .stream()
+                      .map(CategoryDto::new)
+                      .collect(Collectors.toList());
     }
 
     @GetMapping("/categories/{catId}")

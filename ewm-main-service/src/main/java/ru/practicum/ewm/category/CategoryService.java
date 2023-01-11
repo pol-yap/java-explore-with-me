@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.ewm.common.TrimRequest;
 import ru.practicum.ewm.common.errors.NotFoundException;
 
@@ -13,6 +14,7 @@ import java.util.Collection;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+@Transactional
 public class CategoryService {
     private final CategoryRepository repository;
 

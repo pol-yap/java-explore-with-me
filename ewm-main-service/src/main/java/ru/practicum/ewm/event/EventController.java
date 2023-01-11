@@ -91,8 +91,8 @@ public class EventController {
 
     @GetMapping("/users/{userId}/events")
     public List<EventShortDto> privateGetAllByInitiator(@PathVariable Long userId,
-                                                 @RequestParam(defaultValue = "0") Long from,
-                                                 @RequestParam(defaultValue = "10") Integer size) {
+                                                        @RequestParam(defaultValue = "0") Long from,
+                                                        @RequestParam(defaultValue = "10") Integer size) {
         return service.getAllByInitiator(userId, from, size)
                       .stream()
                       .map(EventShortDto::new)
