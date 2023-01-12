@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.ewm.common.TrimRequest;
 import ru.practicum.ewm.common.errors.NotFoundException;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 

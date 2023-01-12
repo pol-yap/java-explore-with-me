@@ -3,6 +3,7 @@ package ru.practicum.ewm.event.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import ru.practicum.ewm.common.Dto;
+import ru.practicum.ewm.common.EwmDateTimeFormatter;
 import ru.practicum.ewm.event.Event;
 import ru.practicum.ewm.event.Location;
 
@@ -10,7 +11,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Getter
 @AllArgsConstructor
@@ -43,12 +43,11 @@ public class NewEventDto implements Dto<Event> {
 
     @Override
     public Event makeEntity() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         return Event.builder()
                     .annotation(annotation)
                     .description(description)
-                    .eventDate(LocalDateTime.parse(eventDate, formatter))
+                    .eventDate(LocalDateTime.parse(eventDate, EwmDateTimeFormatter.formatter))
                     .latitude(location.getLat())
                     .longitude(location.getLon())
                     .paid(paid)

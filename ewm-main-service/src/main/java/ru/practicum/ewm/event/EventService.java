@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.ewm.category.Category;
 import ru.practicum.ewm.category.CategoryService;
+import ru.practicum.ewm.common.EwmDateTimeFormatter;
 import ru.practicum.ewm.common.TrimRequest;
 import ru.practicum.ewm.common.errors.DataCheckException;
 import ru.practicum.ewm.common.errors.NotFoundException;
@@ -19,7 +20,6 @@ import ru.practicum.ewm.event.dto.UpdateEventRequest;
 import ru.practicum.ewm.user.UserService;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -166,8 +166,6 @@ public class EventService {
 
     public List<Event> search(EventSearchCriteria criteria, Long from, Integer size) {
         List<BooleanExpression> conditions = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
         conditions.add(QEvent.event.state.eq(EventState.PUBLISHED));
 
         String text = criteria.getText();
@@ -201,11 +199,11 @@ public class EventService {
 
         LocalDateTime rangeStart = (criteria.getRangeStart() == null) ?
                 LocalDateTime.now() :
-                LocalDateTime.parse(criteria.getRangeStart(), formatter);
+                LocalDateTime.parse(criteria.getRangeStart(), EwmDateTimeFormatter.formatter);
         conditions.add(QEvent.event.eventDate.after(rangeStart));
 
         if (criteria.getRangeEnd() != null) {
-            LocalDateTime rangeEnd = LocalDateTime.parse(criteria.getRangeEnd(), formatter);
+            LocalDateTime rangeEnd = LocalDateTime.parse(criteria.getRangeEnd(), EwmDateTimeFormatter.formatter);
             conditions.add(QEvent.event.eventDate.before(rangeEnd));
         }
 
@@ -358,8 +356,7 @@ public class EventService {
 
         String eventDate = data.getEventDate();
         if (eventDate != null && !eventDate.isBlank()) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            event.setEventDate(LocalDateTime.parse(eventDate, formatter));
+            event.setEventDate(LocalDateTime.parse(eventDate, EwmDateTimeFormatter.formatter));
             isChanged = true;
         }
 
