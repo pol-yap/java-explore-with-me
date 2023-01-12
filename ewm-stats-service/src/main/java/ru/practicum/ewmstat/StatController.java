@@ -21,7 +21,7 @@ public class StatController {
     @GetMapping("/stats")
     public List<ViewStats> getStats(@RequestParam String start,
                                     @RequestParam String end,
-                                    @RequestParam String[] uris,
+                                    @RequestParam List<String> uris,
                                     @RequestParam(defaultValue = "false") Boolean unique) {
 
         return service.getStats(start, end, uris, unique);

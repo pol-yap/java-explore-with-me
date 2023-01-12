@@ -21,7 +21,6 @@ import ru.practicum.ewm.user.UserService;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -236,12 +235,12 @@ public class EventService {
         return repository.findAll(finalCondition, pageable).getContent();
     }
 
-    private List<EventState> convertStatesOrThrow(String[] stateNames) {
-        return Arrays.stream(stateNames)
-                     .map(s -> EventState.from(s).orElseThrow(
+    private List<EventState> convertStatesOrThrow(List<String> stateNames) {
+        return stateNames.stream()
+                         .map(s -> EventState.from(s).orElseThrow(
                              () -> new DataCheckException("Wrong event state: " + s)
-                     ))
-                     .collect(Collectors.toList());
+                         ))
+                         .collect(Collectors.toList());
     }
 
     private void checkDataOrThrow(Event event) {

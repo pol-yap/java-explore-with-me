@@ -50,9 +50,9 @@ public class EndpointHitRepositoryJdbcImpl implements EndpointHitRepository {
         parameters.addValue("end_date", end);
         parameters.addValue("uris", uris);
 
-        String sql = (unique) ? SQL_SELECT_UNIQUE : SQL_SELECT_ALL;
+        String query = (unique) ? SQL_SELECT_UNIQUE : SQL_SELECT_ALL;
 
-        return namedJdbcTemplate.query(sql, parameters,
+        return namedJdbcTemplate.query(query, parameters,
                 (rs, rowNum) -> ViewStats.builder()
                                          .hits(rs.getLong("hits"))
                                          .uri(rs.getString("uri"))

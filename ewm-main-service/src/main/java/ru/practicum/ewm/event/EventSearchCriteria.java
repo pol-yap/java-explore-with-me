@@ -3,17 +3,19 @@ package ru.practicum.ewm.event;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.List;
+
 @Builder
 @Getter
 public class EventSearchCriteria {
 
     private String text;
 
-    private Long[] categories;
+    private List<Long> categories;
 
-    private Long[] users;
+    private List<Long>  users;
 
-    private String[] states;
+    private List<String> states;
 
     private Boolean paid;
 

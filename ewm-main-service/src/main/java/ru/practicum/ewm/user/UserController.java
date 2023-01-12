@@ -20,7 +20,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public List<UserDto> getAll(@RequestParam(defaultValue = "0") long from,
                                 @RequestParam(defaultValue = "10") int size,
-                                @RequestParam Long[] ids) {
+                                @RequestParam List<Long> ids) {
         final List<UserDto> result = new ArrayList<>();
         service.getAll(ids, from, size).forEach(user -> result.add(new UserDto(user)));
 

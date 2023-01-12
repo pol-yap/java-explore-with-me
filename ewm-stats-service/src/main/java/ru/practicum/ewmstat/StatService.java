@@ -22,12 +22,12 @@ public class StatService {
 
     public List<ViewStats> getStats(String start,
                                     String end,
-                                    String[] uris,
+                                    List<String> uris,
                                     Boolean unique) {
         return repository.getStats(
                 LocalDateTime.parse(start, formatter),
                 LocalDateTime.parse(end, formatter),
-                Arrays.asList(uris),
+                uris,
                 unique);
     }
 }
