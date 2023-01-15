@@ -1,5 +1,5 @@
 package ru.practicum.ewm.comments;
-
+//test
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.comments.dto.InputCommentDto;
