@@ -68,6 +68,16 @@ public class CommonExceptionHandler {
         return handleAndResponse(apiError);
     }
 
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<ApiError> handleForbiddenException(ForbiddenException e) {
+        ApiError apiError = ApiError.builder()
+                .message(e.getMessage())
+                .status(HttpStatus.FORBIDDEN)
+                .build();
+
+        return handleAndResponse(apiError);
+    }
+
     private ResponseEntity<ApiError> handleAndResponse(ApiError apiError) {
         log.warn(apiError.getMessage());
 

@@ -81,7 +81,7 @@ CREATE TABLE comments (
 	author_id int8 NOT NULL,
 	is_evidence bool NOT NULL,
 	event_id int8 NOT NULL,
-	modified bool NOT NULL,
+	is_modified bool NOT NULL,
 	last_modified_on timestamp NULL,
 	state int4 NOT NULL,
 	CONSTRAINT comments_pkey PRIMARY KEY (id),

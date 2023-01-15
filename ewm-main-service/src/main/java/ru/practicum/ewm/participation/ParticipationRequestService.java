@@ -12,6 +12,7 @@ import ru.practicum.ewm.user.User;
 import ru.practicum.ewm.user.UserService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -62,6 +63,10 @@ public class ParticipationRequestService {
 
     public List<ParticipationRequest> getAllOfEvent(Long eventId) {
         return repository.findByEventId(eventId);
+    }
+
+    public Optional<ParticipationRequest> getByEventIdAndRequesterId(Long eventId, Long requesterId) {
+        return repository.findByEventIdAndRequesterId(eventId, requesterId);
     }
 
     public ParticipationRequest cancel(Long requestId) {

@@ -1,12 +1,16 @@
 package ru.practicum.ewm.comments.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
+import lombok.Setter;
 import ru.practicum.ewm.comments.Comment;
 import ru.practicum.ewm.event.dto.EventShortDto;
 import ru.practicum.ewm.user.dto.UserShortDto;
 
 import java.time.LocalDateTime;
 
+@Setter
+@Getter
 public class OutputCommentDto {
 
     private Long id;
@@ -23,9 +27,11 @@ public class OutputCommentDto {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime lastModifiedOn;
 
-    private Boolean modified;
+    private Boolean isModified;
 
     private String state;
+
+    private Boolean isEvidence;
 
     public OutputCommentDto(Comment comment) {
         this.id = comment.getId();
@@ -34,7 +40,8 @@ public class OutputCommentDto {
         this.author = new UserShortDto(comment.getAuthor());
         this.createdOn = comment.getCreatedOn();
         this.lastModifiedOn = comment.getLastModifiedOn();
-        this.modified = comment.getModified();
+        this.isModified = comment.getIsModified();
         this.state = comment.getState().name();
+        this.isEvidence = comment.getIsEvidence();
     }
 }

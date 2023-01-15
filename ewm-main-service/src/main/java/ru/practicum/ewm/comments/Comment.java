@@ -35,7 +35,7 @@ public class Comment {
 
     private LocalDateTime lastModifiedOn;
 
-    private Boolean modified = false;
+    private Boolean isModified = false;
 
     private CommentState state = CommentState.PUBLISHED;
 
