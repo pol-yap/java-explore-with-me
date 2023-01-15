@@ -17,7 +17,7 @@
 							"});\r",
 							"pm.test(\"Test create user\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(46);    \r",
 							"    pm.expect(jsonData.email, '\"email\" field').to.eql('initiator@user.com');\r",
 							"    pm.expect(jsonData.name, '\"name\" field').to.eql('event initiator');\r",
 							"});"
@@ -63,7 +63,7 @@
 							"});\r",
 							"pm.test(\"Test create user\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.id, '\"id\" field').to.eql(2);\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(47);\r",
 							"    pm.expect(jsonData.email, '\"email\" field').to.eql('commentator@user.com');\r",
 							"    pm.expect(jsonData.name, '\"name\" field').to.eql('commentator');\r",
 							"});"
@@ -109,7 +109,7 @@
 							"});\r",
 							"pm.test(\"Test create user\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.id, '\"id\" field').to.eql(3);\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(48);\r",
 							"    pm.expect(jsonData.email, '\"email\" field').to.eql('witness@user.com');\r",
 							"    pm.expect(jsonData.name, '\"name\" field').to.eql('witness');\r",
 							"});"
@@ -155,7 +155,7 @@
 							"});\r",
 							"pm.test(\"Test create category\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(43);\r",
 							"    pm.expect(jsonData.name, '\"name\" field').to.eql('category');\r",
 							"});"
 						],
@@ -212,7 +212,7 @@
 							"});\r",
 							"pm.test(\"Test create event\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(26);\r",
 							"    pm.expect(jsonData.annotation, '\"annotation\" field').to.eql('event annotation');\r",
 							"    pm.expect(jsonData.category.name, '\"category.name\" field').to.eql(\"category\");\r",
 							"    pm.expect(jsonData.initiator.name, '\"initiator.name\" field').to.eql(\"event initiator\");\r",
@@ -231,7 +231,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"annotation\": \"event annotation\",\r\n    \"category\": 1,\r\n    \"description\": \"event description\",\r\n    \"eventDate\": \"{{eventDate}}\",\r\n    \"location\": {\r\n        \"lat\": 55.66,\r\n        \"lon\": 37.77\r\n    },\r\n    \"title\": \"some new event\",\r\n    \"requestModeration\": \"false\"\r\n}",
+					"raw": "{\r\n    \"annotation\": \"event annotation\",\r\n    \"category\": 43,\r\n    \"description\": \"event description\",\r\n    \"eventDate\": \"{{eventDate}}\",\r\n    \"location\": {\r\n        \"lat\": 55.66,\r\n        \"lon\": 37.77\r\n    },\r\n    \"title\": \"some new event\",\r\n    \"requestModeration\": \"false\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -251,7 +251,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "1"
+							"value": "46"
 						}
 					]
 				}
@@ -294,7 +294,7 @@
 					"variable": [
 						{
 							"key": "eventId",
-							"value": "1"
+							"value": "26"
 						}
 					]
 				}
@@ -313,8 +313,8 @@
 							"});\r",
 							"pm.test(\"Test create participation request\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.event, '\"event id\" field').to.eql(1);\r",
-							"    pm.expect(jsonData.requester, '\"requester\" field').to.eql(3);\r",
+							"    pm.expect(jsonData.event, '\"event id\" field').to.eql(26);\r",
+							"    pm.expect(jsonData.requester, '\"requester\" field').to.eql(48);\r",
 							"    pm.expect(jsonData.status, '\"status\" field').to.eql('CONFIRMED');\r",
 							"});"
 						],
@@ -326,7 +326,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/users/:userId/requests?eventId=1",
+					"raw": "{{baseUrl}}/users/:userId/requests?eventId=26",
 					"host": [
 						"{{baseUrl}}"
 					],
@@ -338,13 +338,13 @@
 					"query": [
 						{
 							"key": "eventId",
-							"value": "1"
+							"value": "26"
 						}
 					],
 					"variable": [
 						{
 							"key": "userId",
-							"value": "3"
+							"value": "48"
 						}
 					]
 				}
@@ -363,8 +363,8 @@
 							"});\r",
 							"pm.test(\"Test create comment by stranger\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.event.id, '\"event id\" field').to.eql(1);\r",
-							"    pm.expect(jsonData.author.id, '\"author id\" field').to.eql(2);\r",
+							"    pm.expect(jsonData.event.id, '\"event id\" field').to.eql(26);\r",
+							"    pm.expect(jsonData.author.id, '\"author id\" field').to.eql(47);\r",
 							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Some comment by strange commentator');\r",
 							"    pm.expect(jsonData.isEvidence, '\"isEvidence\" field').to.eql(false);\r",
 							"});"
@@ -400,11 +400,11 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "2"
+							"value": "47"
 						},
 						{
 							"key": "eventId",
-							"value": "1"
+							"value": "26"
 						}
 					]
 				}
@@ -423,8 +423,8 @@
 							"});\r",
 							"pm.test(\"Test create comment by participant\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.event.id, '\"event id\" field').to.eql(1);\r",
-							"    pm.expect(jsonData.author.id, '\"author id\" field').to.eql(3);\r",
+							"    pm.expect(jsonData.event.id, '\"event id\" field').to.eql(26);\r",
+							"    pm.expect(jsonData.author.id, '\"author id\" field').to.eql(48);\r",
 							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Some comment by event participant');\r",
 							"    pm.expect(jsonData.isEvidence, '\"isEvidence\" field').to.eql(true);\r",
 							"});"
@@ -460,11 +460,11 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "3"
+							"value": "48"
 						},
 						{
 							"key": "eventId",
-							"value": "1"
+							"value": "26"
 						}
 					]
 				}
@@ -517,7 +517,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "2"
+							"value": "47"
 						},
 						{
 							"key": "commentId",
@@ -569,7 +569,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "3"
+							"value": "48"
 						},
 						{
 							"key": "commentId",
@@ -613,7 +613,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "1"
+							"value": "46"
 						},
 						{
 							"key": "commentId",
@@ -657,7 +657,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "1"
+							"value": "46"
 						},
 						{
 							"key": "commentId",
@@ -701,7 +701,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "1"
+							"value": "46"
 						},
 						{
 							"key": "commentId",
@@ -745,7 +745,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "1"
+							"value": "46"
 						},
 						{
 							"key": "commentId",
@@ -944,7 +944,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "3"
+							"value": "48"
 						},
 						{
 							"key": "commentId",
@@ -993,7 +993,7 @@
 					"variable": [
 						{
 							"key": "eventId",
-							"value": "1"
+							"value": "26"
 						}
 					]
 				}
@@ -1038,7 +1038,7 @@
 					"variable": [
 						{
 							"key": "eventId",
-							"value": "1"
+							"value": "26"
 						},
 						{
 							"key": "commentId",
