@@ -38,4 +38,6 @@ public class Comment {
     private Boolean modified = false;
 
     private CommentState state = CommentState.PUBLISHED;
+
+    private Boolean isEvidence;
 }
