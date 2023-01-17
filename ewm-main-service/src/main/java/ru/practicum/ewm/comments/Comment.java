@@ -1,6 +1,7 @@
 package ru.practicum.ewm.comments;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import ru.practicum.ewm.event.Event;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@NoArgsConstructor
 
 @Entity
 @Table(name = "comments")
@@ -40,4 +42,10 @@ public class Comment {
     private CommentState state = CommentState.PUBLISHED;
 
     private Boolean isEvidence;
+
+    public Comment(String text, Event event, User author) {
+        this.text = text;
+        this.event = event;
+        this.author = author;
+    }
 }

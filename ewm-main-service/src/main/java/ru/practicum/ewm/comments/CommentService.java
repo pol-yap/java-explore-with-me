@@ -16,6 +16,7 @@ import ru.practicum.ewm.participation.ParticipationRequestState;
 import ru.practicum.ewm.user.User;
 import ru.practicum.ewm.user.UserService;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +24,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional
 public class CommentService {
 
     private final CommentRepository repository;
@@ -37,20 +39,17 @@ public class CommentService {
         Event event = eventService.publicGetById(eventId);
         User user = userService.getById(userId);
 
-        if (!event.getState().equals(EventState.PUBLISHED)) {
+        if (event.getState() != EventState.PUBLISHED) {
             throw new ForbiddenException("Only published events can be commented");
         }
 
-        Comment comment = new Comment();
-        comment.setText(text);
-        comment.setEvent(event);
-        comment.setAuthor(user);
+        Comment comment = new Comment(text, event, user);
         Optional<ParticipationRequest> request = participationRequestService.getByEventIdAndRequesterId(
                 eventId,
                 userId);
         comment.setIsEvidence(
-                request.isPresent() && request.get().getState().equals(ParticipationRequestState.CONFIRMED));
-        repository.saveAndFlush(comment);
+                request.isPresent() && request.get().getState() == ParticipationRequestState.CONFIRMED);
+        repository.save(comment);
         log.info("Comment created: {}", comment);
 
         return comment;
@@ -58,11 +57,11 @@ public class CommentService {
 
     public Comment update(Long userId, Long commentId, String text) {
         Comment comment = this.getByIdAndAuthorId(commentId, userId);
-        if (!comment.getState().equals(CommentState.PUBLISHED)) {
+        if (comment.getState() != CommentState.PUBLISHED) {
             throw new ForbiddenException("Only published comment can be modified");
         }
         this.modifyText(comment, text);
-        repository.saveAndFlush(comment);
+        repository.save(comment);
         log.info("Comment modified: {}",comment);
 
         return comment;
@@ -72,7 +71,7 @@ public class CommentService {
         Comment comment = this.getByIdAndAuthorId(commentId, userId);
         this.modifyText(comment, "");
         comment.setState(CommentState.DELETED);
-        repository.saveAndFlush(comment);
+        repository.save(comment);
         log.info("Comment with id {} is deleted", commentId);
     }
 
@@ -89,44 +88,44 @@ public class CommentService {
 
     public void hideByInitiator(Long userId, Long commentId) {
         Comment comment = this.getByIdAndEventInitiatorId(commentId, userId);
-        if (!comment.getState().equals(CommentState.PUBLISHED)) {
+        if (comment.getState() != CommentState.PUBLISHED) {
             throw new ForbiddenException("Only published comment can be hidden");
         }
         comment.setState(CommentState.HIDDEN_BY_EVENT_INITIATOR);
-        repository.saveAndFlush(comment);
+        repository.save(comment);
         log.info("Comment {} is hidden by event initiator", comment);
     }
 
     public void showByInitiator(Long userId, Long commentId) {
         Comment comment = this.getByIdAndEventInitiatorId(commentId, userId);
-        if (!comment.getState().equals(CommentState.HIDDEN_BY_EVENT_INITIATOR)) {
+        if (comment.getState() != CommentState.HIDDEN_BY_EVENT_INITIATOR) {
             throw new ForbiddenException("Only hidden by event initiator comment can be showed by him");
         }
         comment.setState(CommentState.PUBLISHED);
-        repository.saveAndFlush(comment);
+        repository.save(comment);
         log.info("Comment {} is unhidden by event initiator", comment);
     }
 
     public void hideByAdmin(Long commentId) {
         Comment comment = this.getById(commentId);
-        if (!comment.getState().equals(CommentState.PUBLISHED)) {
+        if (comment.getState() != CommentState.PUBLISHED) {
             throw new ForbiddenException("Only published comment can be hidden");
         }
         comment.setState(CommentState.HIDDEN_BY_ADMIN);
-        repository.saveAndFlush(comment);
+        repository.save(comment);
         log.info("Comment {} is hidden by administrator", comment);
     }
 
     public void showByAdmin(Long commentId) {
         Comment comment = this.getById(commentId);
-        if (comment.getState().equals(CommentState.DELETED)) {
+        if (comment.getState() == CommentState.DELETED) {
             throw new ForbiddenException("Deleted comment can't be showed");
         }
-        if (comment.getState().equals(CommentState.PUBLISHED)) {
+        if (comment.getState() == CommentState.PUBLISHED) {
             throw new ForbiddenException("Comment is already visible");
         }
         comment.setState(CommentState.PUBLISHED);
-        repository.saveAndFlush(comment);
+        repository.save(comment);
         log.info("Comment {} is unhidden by administrator", comment);
     }
 
