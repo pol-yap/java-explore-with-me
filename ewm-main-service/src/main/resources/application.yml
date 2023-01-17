@@ -1,0 +1,49 @@
+server.port: 8080
+
+ewm:
+  event:
+    max-title-size: 120
+    min-title-size: 3
+    max-annotation-size: 2000
+    max-description-size: 7000
+    min-hours-after-creation: 2
+    min-hours-after-publish: 1
+  stat-service-url: ${EWM_STAT_SERVICE_URL}
+
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    driver-class-name: org.postgresql.Driver
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+  jpa:
+    show-sql: true
+    open-in-view: false
+    hibernate:
+      #ddl-auto: update
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        format_sql: true
+  sql:
+    init:
+      mode: always
+  config:
+    activate:
+      on-profile: ci,test,default
+
+javax.persistence.schema-generation:
+  database.action: create
+  create-script-source: schema.sql
+
+logging.level:
+  ru.practicum.ewm: TRACE
+  org.springframework:
+    orm:
+      jpa: INFO
+      jpa.JpaTransactionManager: DEBUG
+    transaction: INFO
+    transaction.interceptor: TRACE
+  org.hibernate:
+    type: TRACE
