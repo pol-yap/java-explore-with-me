@@ -1,2 +1,2 @@
 # java-explore-with-me
-https://github.com/pol-yap/java-explore-with-me/pull/3
+Service for finding some events and activities companions
