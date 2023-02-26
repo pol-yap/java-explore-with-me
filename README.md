@@ -19,6 +19,15 @@ This is something like a very simple social network. The user publishes informat
 - Registered users can moderate comments on theirs events
 - There is separately operating service for event views statistics
 
+## Technology stack
+- Java
+- Spring Boot
+- Hibernate
+- QueryDSL
+- PostgreSQL
+- Docker
+
+
 ## Start with Docker
 ### Requirements
 - JDK 11
