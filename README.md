@@ -17,7 +17,7 @@ This is something like a very simple social network. The user publishes informat
 - Only registered users can publicate events
 - There is possibility to leave comments on events
 - Registered users can moderate comments on theirs events
-- Separately operating service for event views statistics
+- There is separately operating service for event views statistics
 
 ## Start with Docker
 ### Requirements
