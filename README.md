@@ -9,7 +9,7 @@ This is something like a very simple social network. The user publishes informat
 - Compilations of events can be formed
 - Event moderation may be mandatory or not
 - Participation approvement may be mandatory or not
-- Event search by keywords, category, fee mandatory, start date
+- Event search by keyword, category, fee mandatory, start date
 - There are three access level
   - *Public* for everyone
   - *Private* for registered users
