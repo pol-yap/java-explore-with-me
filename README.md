@@ -20,7 +20,7 @@ This is something like a very simple social network. The user publishes informat
 - There is separately operating service for event views statistics
 
 ## Technology stack
-- Java SE
+- Java
 - Spring Boot
 - Hibernate
 - QueryDSL
